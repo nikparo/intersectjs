@@ -1,4 +1,4 @@
-intersectjs
+intersect.js
 ===========
 
 JQuery plugin for boolean div and element intersection.
