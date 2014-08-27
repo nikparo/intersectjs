@@ -224,7 +224,7 @@ updateContent(elements, indexes)
       if (el.currentStyle) {
         // getComputedStyle isn't compatible with all older browsers (notably IE).
         // From http://www.quirksmode.org/dom/getstyles.html
-        console.log('using el.currentStyle');
+        // console.log('using el.currentStyle');
         for (var i=0; i<styles.length; i++) {
             result[styles[i]] = el.currentStyle[styles[i]];
         }
@@ -248,11 +248,11 @@ updateContent(elements, indexes)
     function setStyles(el, styles) {
       var val;
       // console.log
-      console.log('setstyles', el, styles);
+      // console.log('setstyles', el, styles);
       for (var key in styles) {
         if ( typeof styles[key] != 'string' ) { val = topx(styles[key]) }
         else { val = styles[key] };
-        console.log('key',key,'val',val, 'el',el);
+        // console.log('key',key,'val',val, 'el',el);
         el.style.setProperty(key, val);
       }
     }
@@ -268,7 +268,7 @@ updateContent(elements, indexes)
     }
 
     function interior(el1, el2) {
-      console.log('interior',el1,el2);
+      // console.log('interior',el1,el2);
       // Create the interior structure of self[index]. index optional.
       // I don't really like this implementation. Might be better as this.interior(el), 
       // iterating over self. Take el as specified or all (clipping) elements.
@@ -277,7 +277,7 @@ updateContent(elements, indexes)
       // else { divs = self.get() };
 
       // for (var i=0; i<divs.length; i++) {
-      var content = el1.innerHTML;
+      var content = el1.innerHTML; // If el1 already has mask classes, this is the wrong way to do it..
       // var iclass = $(el).data('intersect-class'); //Jquery, but should be fairly fast. Easy.
       var iclass = el2.dataset.intersectClass; // Turns out the DOM is no worse.
         // This may give undefined if no class given...
@@ -287,17 +287,17 @@ updateContent(elements, indexes)
       var mask = [];
       // var mask = el2.masks[index]; // Faster, + works with new syntax ...
       // console.log('prior', mask, mask.length);
-      console.log('mask1', mask);
+      // console.log('mask1', mask);
       if (mask.length == 0) {
         mask = document.createElement('div');
         // if (iclass) { mask.className = 'intersect-mask ' + iclass }
         // else { mask.className = 'intersect-mask' };
       }
       // console.log('post', mask);
-      console.log('mask2', mask);
+      // console.log('mask2', mask);
       // console.log('adding classes: ', 'intersect-mask '+iclass, 'to intersect-mask.');
       $(mask).addClass('intersect-mask '+iclass);
-      console.log('mask3', mask);
+      // console.log('mask3', mask);
 
       // mask.className = 'intersect-mask';
       // Set the dimensions of mask
