@@ -220,6 +220,7 @@ updateContent(elements, indexes)
       // console.log('styles-passed', styles);
 
       var result = {};
+      // console.log('running getStyles');
       if (el.currentStyle) {
         // getComputedStyle isn't compatible with all older browsers (notably IE).
         // From http://www.quirksmode.org/dom/getstyles.html
@@ -246,10 +247,12 @@ updateContent(elements, indexes)
 
     function setStyles(el, styles) {
       var val;
-      // console.log('setstyles', el, styles);
+      // console.log
+      console.log('setstyles', el, styles);
       for (var key in styles) {
         if ( typeof styles[key] != 'string' ) { val = topx(styles[key]) }
         else { val = styles[key] };
+        console.log('key',key,'val',val, 'el',el);
         el.style.setProperty(key, val);
       }
     }
@@ -258,11 +261,14 @@ updateContent(elements, indexes)
       // Get the position of el2 relative to el1. Return a {left: x, top: y} array.
       var rect1 = el1.getBoundingClientRect();
       var rect2 = el2.getBoundingClientRect();
+      // console.log(el1.className, rect1, el2.className, rect2);
+      // console.log({left: rect2.left-rect1.left, top: rect2.top-rect1.top});
 
       return {left: rect2.left-rect1.left, top: rect2.top-rect1.top};
     }
 
     function interior(el1, el2) {
+      console.log('interior',el1,el2);
       // Create the interior structure of self[index]. index optional.
       // I don't really like this implementation. Might be better as this.interior(el), 
       // iterating over self. Take el as specified or all (clipping) elements.
@@ -274,19 +280,25 @@ updateContent(elements, indexes)
       var content = el1.innerHTML;
       // var iclass = $(el).data('intersect-class'); //Jquery, but should be fairly fast. Easy.
       var iclass = el2.dataset.intersectClass; // Turns out the DOM is no worse.
+        // This may give undefined if no class given...
 
-      var mask = $(el1).find('> .intersect-mask').get(); // Will this give an error? :s
+      // var mask = $(el1).find('> .intersect-mask').get(); // Will this give an error? :s
+        // Allows setting unique masks in html, but causes bugs. Doesn't allow multiple clips.
+      var mask = [];
       // var mask = el2.masks[index]; // Faster, + works with new syntax ...
       // console.log('prior', mask, mask.length);
+      console.log('mask1', mask);
       if (mask.length == 0) {
         mask = document.createElement('div');
         // if (iclass) { mask.className = 'intersect-mask ' + iclass }
         // else { mask.className = 'intersect-mask' };
       }
       // console.log('post', mask);
-      console.log('adding classes: ', 'intersect-mask '+iclass, 'to intersect-mask.');
+      console.log('mask2', mask);
+      // console.log('adding classes: ', 'intersect-mask '+iclass, 'to intersect-mask.');
       $(mask).addClass('intersect-mask '+iclass);
-      
+      console.log('mask3', mask);
+
       // mask.className = 'intersect-mask';
       // Set the dimensions of mask
       // var styles = [ 'top', 'left', 'right', 'bottom', 'width', 'height', 'padding'];
@@ -295,6 +307,7 @@ updateContent(elements, indexes)
       var relpos = getRelPos(el1,el2);
       // console.log('relpos', relpos);
       // console.log('getStyles', getStyles(el2, styles));
+      // console.log('el1', el1, 'el2', el2, 'mask', mask);
       setStyles(mask, getStyles(el2, styles));
       // console.log('el2 styles:', getStyles(el2, styles));
       // console.log('mask before relpos', mask.style);
@@ -331,6 +344,8 @@ updateContent(elements, indexes)
       // self.oldUpdate(el);
 
       // console.log('attempting refresh code');
+
+      // console.log(self.elements);
 
       if (!(el)) {
         el = self.elements;
