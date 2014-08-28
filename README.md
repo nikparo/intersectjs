@@ -12,13 +12,21 @@ Tips:
 - Using position: fixed on elements within an 'intersect' div breaks it out of the hierarchy. (Since intersect.js uses absolutely positioned divs to create the new intersect content.)
 - Therefore, if something needs to be absolutely fixed, create a fixed container and position the clipping content absolutely or relatively within that. (This could be fixed by adding absolute style to the created div elements... bit of a ball-ache though.)
 - Call .intersect() on classes or ID's? does classes work with many?
+- Intersect.js only takes care of populating and moving the intersect-mask & intersect-content. Any and all other css styles are completely left to the user.
 
 css:
 .bigtext-container {
 	position: absolute; // Could also be fixed or relative.
 }
-
-
+.intersect-mask {
+	position: absolute;
+	pointer-events: none;
+	overflow: hidden;
+	z-index: 10;
+}
+.intersect-content {
+	position: absolute;
+}
 
 Syntax example:
 <div class="intersect-container">

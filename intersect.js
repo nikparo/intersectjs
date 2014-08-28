@@ -2,7 +2,7 @@
 *
 * intersect.js - Boolean div operations for pixel perfect clipping and compositing.
 * URL: http://www.nikparo.com/intersection.js/
-* Version: 0.1.1
+* Version: 0.1.2
 * Author: Nik Paro
 *
 * Requires JQuery (at least for now) (tested with 1.11.1)
