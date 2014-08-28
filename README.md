@@ -13,6 +13,10 @@ Tips:
 - Therefore, if something needs to be absolutely fixed, create a fixed container and position the clipping content absolutely or relatively within that. (This could be fixed by adding absolute style to the created div elements... bit of a ball-ache though.)
 - Call .intersect() on classes or ID's? does classes work with many?
 - Intersect.js only takes care of populating and moving the intersect-mask & intersect-content. Any and all other css styles are completely left to the user.
+- If you have problems with double black on top of each other and transparencies, consider using e.g.
+.dark > .intersect-content > .down-button {
+	opacity: 0.0;
+}
 
 css:
 .bigtext-container {
